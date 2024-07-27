@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import App from "../App";
-import adminRoutes, { facultyPaths } from "./adminRoutes";
+import { facultyPaths } from "./adminRoutes";
 import { routeGenerator } from "../utils/routesGenertor";
 import adminPaths from "./adminRoutes";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: routeGenerator(adminPaths),
   },
   {
